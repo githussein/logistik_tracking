@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/feedback_container_widget.dart';
 import '../providers/auth.dart';
+import 'objects_screen.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({Key? key}) : super(key: key);
+
+  static const routeName = '/sign-in';
 
   @override
   _SigninScreenState createState() => _SigninScreenState();
@@ -18,7 +21,7 @@ class _SigninScreenState extends State<SigninScreen> {
   bool _isError = false;
   bool _isLoading = false;
   static const errorInvalidCredentials = 'Invalid username or password';
-  static const errorInvalidBackendUrl = 'Invalid target backend URL';
+  static const errorInvalidBackendUrl = 'Server could not be reached';
   static const errorInvalidPath = 'Could not connect to the server';
   String _errorMessage = '';
 
@@ -81,7 +84,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             );
 
-                            Navigator.of(context).pop();
+                            Navigator.pop(context);
                           } catch (error) {
                             _errorMessage = errorInvalidBackendUrl;
                             setState(() => _isError = true);
@@ -182,7 +185,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
       if (statusCode == 200) {
         _errorMessage = '';
-        //@TODO redirect to next view
+        Navigator.of(context).pushNamed(ObjectsScreen.routeName);
       } else if (statusCode == 401) {
         _errorMessage = errorInvalidCredentials;
       } else if (statusCode == 404) {
