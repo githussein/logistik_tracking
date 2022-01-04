@@ -5,18 +5,21 @@ import 'package:http/http.dart' as http;
 /// The authentication provider
 class Auth with ChangeNotifier {
   /// The locally stored base url and auth header
-  var storedBackendUrl = '';
-  var storedAuthHeader = '';
+  var backendUrl = '';
+  var authHeader = {'authorization': ''};
 
+  /// Checks if the app can connect to a valid  backend
+  ///
+  /// Takes the [targetBackendUrl] and in case of no error that means
+  /// a connection is successful to the valid server.
   Future<int> validateTargetBackend(String targetBackendUrl) async {
     var targetUrl = Uri.parse('$targetBackendUrl/riot-api/config');
 
     try {
       final response = await http.get(targetUrl);
 
-      storedBackendUrl = targetBackendUrl;
+      backendUrl = targetBackendUrl;
 
-      print('validation: ${response.statusCode}');
       return response.statusCode;
     } catch (error) {
       rethrow;
@@ -33,13 +36,13 @@ class Auth with ChangeNotifier {
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
     try {
+      authHeader = {'authorization': basicAuth};
+      backendUrl = baseUrl;
+
       final response = await http.get(
         targetUrl,
-        headers: <String, String>{'authorization': basicAuth},
+        headers: authHeader,
       );
-
-      storedBackendUrl = baseUrl;
-      storedAuthHeader = basicAuth;
 
       return response.statusCode;
     } catch (error) {
