@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens/objects_screen.dart';
 import 'screens/signin_screen.dart';
+import 'screens/bottom_nav_bar.dart';
+import 'screens/home_screen.dart';
+import 'screens/objects_screen.dart';
+import 'screens/settings_screen.dart';
 import 'providers/auth.dart';
 import 'providers/objects.dart';
 
@@ -27,7 +30,10 @@ class DemoMobileApp extends StatelessWidget {
         ),
         routes: {
           SigninScreen.routeName: (context) => const SigninScreen(),
+          BottomNavBar.routeName: (context) => const BottomNavBar(),
+          HomeScreen.routeName: (context) => const HomeScreen(),
           ObjectsScreen.routeName: (context) => const ObjectsScreen(),
+          SettingsScreen.routeName: (context) => const SettingsScreen(),
         },
         home: const SigninScreen(),
       ),

@@ -14,7 +14,6 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: const Image(image: AssetImage('assets/images/favicon.png')),
       backgroundColor: Colors.grey.shade800,
       title: Text(screenTitle, style: const TextStyle(color: Colors.white)),
     );

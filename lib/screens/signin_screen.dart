@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/feedback_container_widget.dart';
 import '../providers/auth.dart';
-import 'objects_screen.dart';
+import 'bottom_nav_bar.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({Key? key}) : super(key: key);
@@ -185,7 +185,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
       if (statusCode == 200) {
         _errorMessage = '';
-        Navigator.of(context).pushNamed(ObjectsScreen.routeName);
+        Navigator.of(context).pushReplacementNamed(BottomNavBar.routeName);
       } else if (statusCode == 401) {
         _errorMessage = errorInvalidCredentials;
       } else if (statusCode == 404) {
