@@ -1,0 +1,16 @@
+{
+    "signIn": "Anmelden",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "targetUrl": "Zielsystem",
+    "updateLink": "Link aktualisieren",
+    "close": "Schließen",
+    "errorInvalidCredentials": "Benutzername oder Passwort ungültig",
+    "errorInvalidBackendUrl": "Pfad konnte nicht gefunden werden",
+    "errorInvalidPath": "Pfad konnte nicht gefunden werden",
+    "baseUrlUpdated": "wird derzeit verwendet",
+    "home": "Home",
+    "objects": "Objekte",
+    "labels": "Labels",
+    "settings": "Einstellungen"
+}

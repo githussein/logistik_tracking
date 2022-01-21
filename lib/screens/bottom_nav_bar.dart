@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'objects_screen.dart';
 import 'settings_screen.dart';
@@ -34,19 +35,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
     }
   }
 
-  final List<BottomNavigationBarItem> _items = const [
-    BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.rocket),
-      label: 'Objects',
-    ),
-    BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.cog),
-      label: 'Settings',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<BottomNavigationBarItem> _items = [
+      BottomNavigationBarItem(
+        icon: const FaIcon(FontAwesomeIcons.rocket),
+        label: AppLocalizations.of(context)!.objects,
+      ),
+      BottomNavigationBarItem(
+        icon: const FaIcon(FontAwesomeIcons.cog),
+        label: AppLocalizations.of(context)!.settings,
+      ),
+    ];
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =

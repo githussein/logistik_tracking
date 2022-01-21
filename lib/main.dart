@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'screens/signin_screen.dart';
 import 'screens/bottom_nav_bar.dart';
 import 'screens/home_screen.dart';
@@ -25,6 +26,8 @@ class DemoMobileApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Demo Mobile APP',
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData(
           primarySwatch: Colors.lightBlue,
         ),

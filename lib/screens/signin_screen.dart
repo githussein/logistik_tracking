@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../widgets/feedback_container_widget.dart';
 import '../providers/auth.dart';
@@ -20,9 +21,6 @@ class _SigninScreenState extends State<SigninScreen> {
       TextEditingController(text: 'http://mohamed-hussein.base.knx');
   bool _isError = false;
   bool _isLoading = false;
-  static const errorInvalidCredentials = 'Invalid username or password';
-  static const errorInvalidBackendUrl = 'Server could not be reached';
-  static const errorInvalidPath = 'Could not connect to the server';
   String _errorMessage = '';
 
   final Divider _lineDivider =
@@ -42,13 +40,14 @@ class _SigninScreenState extends State<SigninScreen> {
                 _isError = false;
                 return StatefulBuilder(builder: (context, setState) {
                   return AlertDialog(
-                    title: const Text('Target backend URL'),
+                    title: Text(AppLocalizations.of(context)!.targetUrl),
                     content: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (_isError)
-                          const FeedbackContainer(
-                              errorMessage: errorInvalidBackendUrl),
+                          FeedbackContainer(
+                              errorMessage: AppLocalizations.of(context)!
+                                  .errorInvalidBackendUrl),
                         TextFormField(
                           maxLines: 2,
                           controller: targetBackendUrlController,
@@ -62,13 +61,13 @@ class _SigninScreenState extends State<SigninScreen> {
                     ),
                     actions: [
                       TextButton(
-                        child: const Text('Close'),
+                        child: Text(AppLocalizations.of(context)!.close),
                         onPressed: () => Navigator.pop(context),
                       ),
                       TextButton(
                         child: _isLoading
                             ? const CircularProgressIndicator()
-                            : const Text('Update link'),
+                            : Text(AppLocalizations.of(context)!.updateLink),
                         onPressed: () async {
                           _isError = false;
                           setState(() => _isLoading = true);
@@ -80,13 +79,14 @@ class _SigninScreenState extends State<SigninScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                    '${targetBackendUrlController.text} \nis now being used.'),
+                                    '${targetBackendUrlController.text} \n${AppLocalizations.of(context)!.baseUrlUpdated}.'),
                               ),
                             );
 
                             Navigator.pop(context);
                           } catch (error) {
-                            _errorMessage = errorInvalidBackendUrl;
+                            _errorMessage = AppLocalizations.of(context)!
+                                .errorInvalidBackendUrl;
                             setState(() => _isError = true);
                           }
                           setState(() => _isLoading = false);
@@ -117,7 +117,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 child: _isLoading
                     ? const CircularProgressIndicator()
                     : Text(
-                        'Sign in',
+                        AppLocalizations.of(context)!.signIn,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 18,
@@ -130,22 +130,22 @@ class _SigninScreenState extends State<SigninScreen> {
               TextFormField(
                 controller: usernameController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                    labelText: 'Username',
-                    suffixIcon: Icon(Icons.person),
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.username,
+                    suffixIcon: const Icon(Icons.person),
                     border: InputBorder.none,
-                    fillColor: Color(0xfff3f3f3),
+                    fillColor: const Color(0xfff3f3f3),
                     filled: true),
               ),
               _lineDivider,
               TextFormField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                    labelText: 'Password',
-                    suffixIcon: Icon(Icons.lock),
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.password,
+                    suffixIcon: const Icon(Icons.lock),
                     border: InputBorder.none,
-                    fillColor: Color(0xfff3f3f3),
+                    fillColor: const Color(0xfff3f3f3),
                     filled: true),
               ),
               ListTile(
@@ -157,10 +157,10 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 ),
                 tileColor: Theme.of(context).primaryColorDark,
-                title: const Text(
-                  'Sign in',
+                title: Text(
+                  AppLocalizations.of(context)!.signIn,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
@@ -187,12 +187,12 @@ class _SigninScreenState extends State<SigninScreen> {
         _errorMessage = '';
         Navigator.of(context).pushReplacementNamed(BottomNavBar.routeName);
       } else if (statusCode == 401) {
-        _errorMessage = errorInvalidCredentials;
+        _errorMessage = AppLocalizations.of(context)!.errorInvalidCredentials;
       } else if (statusCode == 404) {
-        _errorMessage = errorInvalidPath;
+        _errorMessage = AppLocalizations.of(context)!.errorInvalidPath;
       }
     } catch (error) {
-      _errorMessage = errorInvalidBackendUrl;
+      _errorMessage = AppLocalizations.of(context)!.errorInvalidBackendUrl;
     }
 
     setState(() {
