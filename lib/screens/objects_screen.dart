@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../providers/objects.dart';
 import '../widgets/custom_app_bar_widget.dart';
@@ -35,7 +36,7 @@ class _ObjectsScreenState extends State<ObjectsScreen> {
   Widget build(BuildContext context) {
     final objects = Provider.of<Objects>(context, listen: false).objectsList;
     return Scaffold(
-      appBar: const CustomAppBar(screenTitle: 'Objects'),
+      appBar: CustomAppBar(screenTitle: AppLocalizations.of(context)!.objects),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Container(

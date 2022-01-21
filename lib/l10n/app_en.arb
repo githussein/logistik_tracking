@@ -1,0 +1,16 @@
+{
+    "signIn": "Sign In",
+    "username": "Username",
+    "password": "password",
+    "targetUrl": "Target backend URL",
+    "updateLink": "Update link",
+    "close": "Close",
+    "errorInvalidCredentials": "Invalid username or password",
+    "errorInvalidBackendUrl": "Server could not be reached",
+    "errorInvalidPath": "Could not connect to the server",
+    "baseUrlUpdated": "is now being used",
+    "home": "Home",
+    "objects": "Objects",
+    "labels": "Labels",
+    "settings": "Settings"
+}
