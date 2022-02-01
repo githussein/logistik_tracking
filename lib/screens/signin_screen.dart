@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../widgets/feedback_container_widget.dart';
+import '../providers/locale.dart';
 import '../providers/auth.dart';
 import 'bottom_nav_bar.dart';
 
@@ -22,6 +23,16 @@ class _SigninScreenState extends State<SigninScreen> {
   bool _isError = false;
   bool _isLoading = false;
   String _errorMessage = '';
+
+  @override
+  void didChangeDependencies() async {
+    final storedLocale =
+        await Provider.of<LocaleProvider>(context, listen: false).getLocale();
+    await Provider.of<LocaleProvider>(context, listen: false)
+        .setLocale(storedLocale);
+
+    super.didChangeDependencies();
+  }
 
   final Divider _lineDivider =
       Divider(color: Colors.grey.shade300, height: 1, thickness: 1);
