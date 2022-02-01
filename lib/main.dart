@@ -8,6 +8,7 @@ import 'screens/objects_screen.dart';
 import 'screens/settings_screen.dart';
 import 'providers/auth.dart';
 import 'providers/objects.dart';
+import 'providers/locale.dart';
 
 void main() {
   runApp(const DemoMobileApp());
@@ -22,23 +23,29 @@ class DemoMobileApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Auth()),
         ChangeNotifierProvider(create: (context) => Objects()),
+        ChangeNotifierProvider(create: (context) => LocaleProvider()),
       ],
-      child: MaterialApp(
-        title: 'Demo Mobile APP',
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: ThemeData(
-          primarySwatch: Colors.lightBlue,
-        ),
-        routes: {
-          SigninScreen.routeName: (context) => const SigninScreen(),
-          BottomNavBar.routeName: (context) => const BottomNavBar(),
-          HomeScreen.routeName: (context) => const HomeScreen(),
-          ObjectsScreen.routeName: (context) => const ObjectsScreen(),
-          SettingsScreen.routeName: (context) => const SettingsScreen(),
+      child: Consumer<LocaleProvider>(
+        builder: (context, provider, child) {
+          return MaterialApp(
+            title: 'Demo Mobile APP',
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            theme: ThemeData(
+              primarySwatch: Colors.lightBlue,
+            ),
+            locale: Provider.of<LocaleProvider>(context).locale,
+            routes: {
+              SigninScreen.routeName: (context) => const SigninScreen(),
+              BottomNavBar.routeName: (context) => const BottomNavBar(),
+              HomeScreen.routeName: (context) => const HomeScreen(),
+              ObjectsScreen.routeName: (context) => const ObjectsScreen(),
+              SettingsScreen.routeName: (context) => const SettingsScreen(),
+            },
+            home: const SigninScreen(),
+          );
         },
-        home: const SigninScreen(),
       ),
     );
   }

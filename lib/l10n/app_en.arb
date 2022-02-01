@@ -12,5 +12,7 @@
     "home": "Home",
     "objects": "Objects",
     "labels": "Labels",
-    "settings": "Settings"
+    "settings": "Settings",
+    "switchLanguage": "Sprache auf Deutsch umstellen",
+    "signOut": "Sign out"
 }

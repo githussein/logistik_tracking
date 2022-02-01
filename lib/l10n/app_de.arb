@@ -6,11 +6,13 @@
     "updateLink": "Link aktualisieren",
     "close": "Schließen",
     "errorInvalidCredentials": "Benutzername oder Passwort ungültig",
-    "errorInvalidBackendUrl": "Pfad konnte nicht gefunden werden",
+    "errorInvalidBackendUrl": "Server konnte nicht erreicht werden",
     "errorInvalidPath": "Pfad konnte nicht gefunden werden",
     "baseUrlUpdated": "wird derzeit verwendet",
     "home": "Home",
     "objects": "Objekte",
     "labels": "Labels",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "switchLanguage": "Switch language to English",
+    "signOut": "Ausloggen"
 }

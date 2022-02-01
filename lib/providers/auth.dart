@@ -4,9 +4,10 @@ import 'package:http/http.dart' as http;
 
 /// The authentication provider
 class Auth with ChangeNotifier {
-  /// The locally stored base url and auth header
+  /// The locally stored data
   var backendUrl = '';
   var authHeader = {'authorization': ''};
+  String username = '';
 
   /// Checks if the app can connect to a valid  backend
   ///
@@ -44,6 +45,7 @@ class Auth with ChangeNotifier {
         headers: authHeader,
       );
 
+      this.username = username;
       return response.statusCode;
     } catch (error) {
       rethrow;
