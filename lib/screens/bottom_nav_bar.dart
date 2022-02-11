@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'objects_screen.dart';
+import 'orders_screen.dart';
 import 'settings_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -14,13 +14,13 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  String _currentPage = 'Objects';
+  String _currentPage = 'Orders';
   int _selectedIndex = 0;
 
-  List<String> pageKeys = ['Objects', 'Settings'];
+  List<String> pageKeys = ['Orders', 'Settings'];
 
   final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
-    'Objects': GlobalKey<NavigatorState>(),
+    'Orders': GlobalKey<NavigatorState>(),
     'Settings': GlobalKey<NavigatorState>(),
   };
 
@@ -39,11 +39,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     final List<BottomNavigationBarItem> _items = [
       BottomNavigationBarItem(
-        icon: const FaIcon(FontAwesomeIcons.rocket),
-        label: AppLocalizations.of(context)!.objects,
+        icon: const Padding(
+          padding: EdgeInsets.only(bottom: 8),
+          child: FaIcon(FontAwesomeIcons.box),
+        ),
+        label: AppLocalizations.of(context)!.orders,
       ),
       BottomNavigationBarItem(
-        icon: const FaIcon(FontAwesomeIcons.cog),
+        icon: const Padding(
+          padding: EdgeInsets.only(bottom: 8),
+          child: FaIcon(FontAwesomeIcons.cog),
+        ),
         label: AppLocalizations.of(context)!.settings,
       ),
     ];
@@ -52,8 +58,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         final isFirstRouteInCurrentTab =
             !await _navigatorKeys[_selectedIndex]!.currentState!.maybePop();
         if (isFirstRouteInCurrentTab) {
-          if (_currentPage != 'Objects') {
-            _selectTab('Objects', 0);
+          if (_currentPage != 'Orders') {
+            _selectTab('Orders', 0);
             return false;
           }
         }
@@ -62,7 +68,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: Scaffold(
         body: Stack(
           children: [
-            _buildOffstageNavigator('Objects'),
+            _buildOffstageNavigator('Orders'),
             _buildOffstageNavigator('Settings'),
           ],
         ),
@@ -96,7 +102,7 @@ class TabNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget child = const ObjectsScreen();
+    Widget child = const OrdersScreen();
     if (tabItem == 'Settings') {
       child = const SettingsScreen();
     }

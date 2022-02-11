@@ -11,8 +11,11 @@
     "baseUrlUpdated": "wird derzeit verwendet",
     "home": "Home",
     "objects": "Objekte",
+    "orders": "Aufträge",
     "labels": "Labels",
     "settings": "Einstellungen",
     "switchLanguage": "Switch language to English",
-    "signOut": "Ausloggen"
+    "signOut": "Ausloggen",
+    "orderId": "Auftrags ID",
+    "location": "Standort"
 }

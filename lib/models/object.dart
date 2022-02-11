@@ -1,6 +1,15 @@
 class Object {
   final int id;
-  String name;
+  final String name;
+  final String trackingId;
+  final String location;
+  final DateTime locationEnterTimestamp;
 
-  Object({required this.id, this.name = ''});
+  Object({
+    required this.id,
+    required this.name,
+    required this.trackingId,
+    required this.location,
+    required this.locationEnterTimestamp,
+  });
 }
