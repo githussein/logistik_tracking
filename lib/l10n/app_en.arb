@@ -1,7 +1,7 @@
 {
     "signIn": "Sign In",
     "username": "Username",
-    "password": "password",
+    "password": "Password",
     "targetUrl": "Target backend URL",
     "updateLink": "Update link",
     "close": "Close",
@@ -11,8 +11,11 @@
     "baseUrlUpdated": "is now being used",
     "home": "Home",
     "objects": "Objects",
+    "orders": "Orders",
     "labels": "Labels",
     "settings": "Settings",
     "switchLanguage": "Sprache auf Deutsch umstellen",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "orderId": "Order ID",
+    "location": "Location"
 }

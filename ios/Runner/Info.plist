@@ -4,11 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-    <key>CFBundleLocalizations</key>
-    <array>
-        <string>en</string>
-        <string>de</string>
-    </array>
 	<key>CFBundleDisplayName</key>
 	<string>Demo Mobile App</string>
 	<key>CFBundleExecutable</key>
@@ -17,6 +12,11 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>de</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>mobile_demo_app</string>
 	<key>CFBundlePackageType</key>

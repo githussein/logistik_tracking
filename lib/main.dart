@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'screens/signin_screen.dart';
 import 'screens/bottom_nav_bar.dart';
 import 'screens/home_screen.dart';
-import 'screens/objects_screen.dart';
+import 'screens/orders_screen.dart';
 import 'screens/settings_screen.dart';
 import 'providers/auth.dart';
 import 'providers/objects.dart';
@@ -40,7 +40,7 @@ class DemoMobileApp extends StatelessWidget {
               SigninScreen.routeName: (context) => const SigninScreen(),
               BottomNavBar.routeName: (context) => const BottomNavBar(),
               HomeScreen.routeName: (context) => const HomeScreen(),
-              ObjectsScreen.routeName: (context) => const ObjectsScreen(),
+              OrdersScreen.routeName: (context) => const OrdersScreen(),
               SettingsScreen.routeName: (context) => const SettingsScreen(),
             },
             home: const SigninScreen(),

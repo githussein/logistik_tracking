@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../screens/objects_screen.dart';
+import '../screens/orders_screen.dart';
 
 class FeatureItem extends StatelessWidget {
   const FeatureItem({Key? key, required this.title, required this.icon})
@@ -26,7 +26,7 @@ class FeatureItem extends StatelessWidget {
           switch (title) {
             case 'Objects':
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const ObjectsScreen()));
+                  MaterialPageRoute(builder: (_) => const OrdersScreen()));
               break;
             case 'Labels':
               break;
