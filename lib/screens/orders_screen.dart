@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../providers/objects.dart';
 import '../widgets/custom_app_bar_widget.dart';
+import '../models/object.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key}) : super(key: key);
@@ -18,6 +19,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
   var _isLoading = false;
   static const TextStyle _listHeaderStyle =
       TextStyle(fontWeight: FontWeight.w800, fontSize: 16);
+  List<Object> orders = [];
+  final _controller = TextEditingController();
 
   @override
   void didChangeDependencies() {
@@ -25,6 +28,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
       setState(() => _isLoading = true);
       Provider.of<Objects>(context)
           .fetchOrders(context)
+          .then((_) =>
+              orders = Provider.of<Objects>(context, listen: false).ordersList)
           .then((_) => setState(() => _isLoading = false));
     }
     _isInit = false;
@@ -34,7 +39,6 @@ class _OrdersScreenState extends State<OrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final orders = Provider.of<Objects>(context, listen: false).ordersList;
     return Scaffold(
       appBar: CustomAppBar(screenTitle: AppLocalizations.of(context)!.orders),
       body: _isLoading
@@ -43,6 +47,26 @@ class _OrdersScreenState extends State<OrdersScreen> {
               padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
+                  TextField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.zero,
+                      hintText: AppLocalizations.of(context)!.findOrders,
+                      prefixIcon: _controller.text.isEmpty
+                          ? const Icon(Icons.search)
+                          : IconButton(
+                              icon: const Icon(Icons.cancel_outlined),
+                              onPressed: () {
+                                _controller.clear();
+                                searchOrder('');
+                              },
+                            ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    onChanged: searchOrder,
+                  ),
                   ListTile(
                     dense: true,
                     selected: true,
@@ -103,5 +127,18 @@ class _OrdersScreenState extends State<OrdersScreen> {
               ),
             ),
     );
+  }
+
+  void searchOrder(String query) {
+    orders = Provider.of<Objects>(context, listen: false).ordersList;
+
+    final _filteredOrders = orders.where((order) {
+      return order.trackingId
+          .toString()
+          .toLowerCase()
+          .contains(query.toString().toLowerCase());
+    }).toList();
+
+    setState(() => orders = _filteredOrders);
   }
 }

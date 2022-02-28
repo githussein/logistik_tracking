@@ -17,5 +17,6 @@
     "switchLanguage": "Sprache auf Deutsch umstellen",
     "signOut": "Sign out",
     "orderId": "Order ID",
-    "location": "Location"
+    "location": "Location",
+    "findOrders": "Find orders"
 }
