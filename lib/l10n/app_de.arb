@@ -17,5 +17,6 @@
     "switchLanguage": "Switch language to English",
     "signOut": "Ausloggen",
     "orderId": "Auftrags ID",
-    "location": "Standort"
+    "location": "Standort",
+    "findOrders": "Aufträge finden"
 }
