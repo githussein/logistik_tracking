@@ -18,5 +18,6 @@
     "signOut": "Ausloggen",
     "orderId": "Auftrags ID",
     "location": "Standort",
-    "findOrders": "Aufträge finden"
+    "findOrders": "Aufträge finden",
+    "cancel": "Abbrechen"
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../providers/objects.dart';
 import '../widgets/custom_app_bar_widget.dart';
 import '../models/object.dart';
@@ -50,12 +52,17 @@ class _OrdersScreenState extends State<OrdersScreen> {
                   TextField(
                     controller: _controller,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.zero,
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
                       hintText: AppLocalizations.of(context)!.findOrders,
-                      prefixIcon: _controller.text.isEmpty
-                          ? const Icon(Icons.search)
+                      prefixIcon: const Icon(Icons.search, size: 30),
+                      suffixIcon: _controller.text.isEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.qr_code, size: 30),
+                              onPressed: () => scanQRCode(),
+                            )
                           : IconButton(
-                              icon: const Icon(Icons.cancel_outlined),
+                              icon: const Icon(Icons.clear, size: 30),
                               onPressed: () {
                                 _controller.clear();
                                 searchOrder('');
@@ -140,5 +147,21 @@ class _OrdersScreenState extends State<OrdersScreen> {
     }).toList();
 
     setState(() => orders = _filteredOrders);
+  }
+
+  Future<void> scanQRCode() async {
+    try {
+      String scannedCode = await FlutterBarcodeScanner.scanBarcode('#1aa7ec',
+          AppLocalizations.of(context)!.cancel, true, ScanMode.BARCODE);
+
+      if (!mounted) return;
+
+      if (scannedCode == '-1') scannedCode = '';
+
+      _controller.text = scannedCode;
+      searchOrder(scannedCode);
+    } on PlatformException {
+      searchOrder('');
+    }
   }
 }
