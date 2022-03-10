@@ -18,5 +18,6 @@
     "signOut": "Sign out",
     "orderId": "Order ID",
     "location": "Location",
-    "findOrders": "Find orders"
+    "findOrders": "Find orders",
+    "cancel": "Cancel"
 }

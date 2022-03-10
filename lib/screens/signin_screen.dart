@@ -19,7 +19,7 @@ class _SigninScreenState extends State<SigninScreen> {
   final usernameController = TextEditingController(text: 'kinexon');
   final passwordController = TextEditingController(text: 'kinexon');
   final targetBackendUrlController =
-      TextEditingController(text: 'http://mohamed-hussein.base.knx');
+      TextEditingController(text: 'https://samy.access.kinexon.com');
   bool _isError = false;
   bool _isLoading = false;
   String _errorMessage = '';
