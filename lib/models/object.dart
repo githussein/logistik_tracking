@@ -4,6 +4,8 @@ class Object {
   final String trackingId;
   final String location;
   final DateTime locationEnterTimestamp;
+  bool materialA = false;
+  bool materialB = false;
 
   Object({
     required this.id,
@@ -11,5 +13,7 @@ class Object {
     required this.trackingId,
     required this.location,
     required this.locationEnterTimestamp,
+    required this.materialA,
+    required this.materialB,
   });
 }

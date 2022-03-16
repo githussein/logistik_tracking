@@ -19,5 +19,7 @@
     "orderId": "Auftrags ID",
     "location": "Standort",
     "findOrders": "Aufträge finden",
+    "timeInProcessStep": "Dauer im aktuellen Prozessschritt",
+    "materialAssembly": "Material Montage",
     "cancel": "Abbrechen"
 }

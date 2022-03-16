@@ -4,8 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../providers/objects.dart';
+import '../providers/thresholds.dart';
 import '../widgets/custom_app_bar_widget.dart';
 import '../models/object.dart';
+import 'order_details_screen.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key}) : super(key: key);
@@ -30,6 +32,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
       setState(() => _isLoading = true);
       Provider.of<Objects>(context)
           .fetchOrders(context)
+          .then((_) => Provider.of<ProcessStepThresholds>(context, listen: false)
+              .fetchProcessModel(context))
           .then((_) =>
               orders = Provider.of<Objects>(context, listen: false).ordersList)
           .then((_) => setState(() => _isLoading = false));
@@ -101,7 +105,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               : orders[index].trackingId;
 
                           return ListTile(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) =>
+                                      OrderDetailsScreen(orders[index])));
+                            },
                             dense: true,
                             leading: SizedBox(
                               width: MediaQuery.of(context).size.width / 3,
