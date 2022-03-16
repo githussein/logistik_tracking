@@ -1,4 +1,4 @@
-package com.example.demo_mobile_app
+package com.kinexon.demomobileapp
 
 import io.flutter.embedding.android.FlutterActivity
 
