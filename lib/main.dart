@@ -9,6 +9,7 @@ import 'screens/settings_screen.dart';
 import 'providers/auth.dart';
 import 'providers/objects.dart';
 import 'providers/locale.dart';
+import 'providers/thresholds.dart';
 
 void main() {
   runApp(const DemoMobileApp());
@@ -24,6 +25,7 @@ class DemoMobileApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Auth()),
         ChangeNotifierProvider(create: (context) => Objects()),
         ChangeNotifierProvider(create: (context) => LocaleProvider()),
+        ChangeNotifierProvider(create: (context) => ProcessStepThresholds()),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, provider, child) {

@@ -33,6 +33,8 @@ class Objects with ChangeNotifier {
             trackingId: object['properties']['tracking-id'] ?? '',
             location: currentGeofences[0][0],
             locationEnterTimestamp: DateTime.parse(currentGeofences[0][1]),
+            materialA: object['properties'].containsKey('Material A'),
+            materialB: object['properties'].containsKey('Material B'),
           ));
         } else {
           loadedObjects.add(Object(
@@ -41,6 +43,8 @@ class Objects with ChangeNotifier {
             trackingId: object['properties']['tracking-id'] ?? '',
             location: 'unknown',
             locationEnterTimestamp: DateTime.now(),
+            materialA: false,
+            materialB: false,
           ));
         }
       }

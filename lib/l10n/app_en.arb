@@ -19,5 +19,7 @@
     "orderId": "Order ID",
     "location": "Location",
     "findOrders": "Find orders",
+    "timeInProcessStep": "Time in current process step",
+    "materialAssembly": "Material Assembly",
     "cancel": "Cancel"
 }
