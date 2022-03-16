@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "188484207195",
+    "project_id": "knx-demo-smartphone-app",
+    "storage_bucket": "knx-demo-smartphone-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:188484207195:android:97a7abfdc52ac9e30d357e",
+        "android_client_info": {
+          "package_name": "com.kinexon.demomobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "188484207195-shimmubqk4cljs0a4hch75610a1fgapl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEcaFVXXEzS3Ji1qCI73DSD944SfyK2_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "188484207195-shimmubqk4cljs0a4hch75610a1fgapl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
