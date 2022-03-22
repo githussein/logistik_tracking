@@ -8,6 +8,7 @@
     "errorInvalidCredentials": "Benutzername oder Passwort ungültig",
     "errorInvalidBackendUrl": "Server konnte nicht erreicht werden",
     "errorInvalidPath": "Pfad konnte nicht gefunden werden",
+    "errorEmptyTargetUrl": "Zielsystem-URL fehlt. Bitte klicken Sie auf den Button in der oberen rechten Ecke um sie einzugeben.",
     "baseUrlUpdated": "wird derzeit verwendet",
     "home": "Home",
     "objects": "Objekte",

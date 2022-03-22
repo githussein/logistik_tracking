@@ -8,6 +8,7 @@
     "errorInvalidCredentials": "Invalid username or password",
     "errorInvalidBackendUrl": "Server could not be reached",
     "errorInvalidPath": "Could not connect to the server",
+    "errorEmptyTargetUrl": "Target URL is not set. Please click on the button at the top right corner to set it.",
     "baseUrlUpdated": "is now being used",
     "home": "Home",
     "objects": "Objects",

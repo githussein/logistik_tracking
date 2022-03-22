@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'screens/signin_screen.dart';
+import 'screens/sign_in_screen.dart';
 import 'screens/bottom_nav_bar.dart';
 import 'screens/home_screen.dart';
 import 'screens/orders_screen.dart';
@@ -39,13 +39,13 @@ class DemoMobileApp extends StatelessWidget {
             ),
             locale: Provider.of<LocaleProvider>(context).locale,
             routes: {
-              SigninScreen.routeName: (context) => const SigninScreen(),
+              SignInScreen.routeName: (context) => const SignInScreen(),
               BottomNavBar.routeName: (context) => const BottomNavBar(),
               HomeScreen.routeName: (context) => const HomeScreen(),
               OrdersScreen.routeName: (context) => const OrdersScreen(),
               SettingsScreen.routeName: (context) => const SettingsScreen(),
             },
-            home: const SigninScreen(),
+            home: const SignInScreen(),
           );
         },
       ),

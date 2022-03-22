@@ -10,14 +10,12 @@ class FeedbackContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        color: Colors.red.withOpacity(0.1),
-        child: Text(
-          _errorMessage,
-          style: TextStyle(color: Colors.red[300]),
-        ),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      color: Colors.red.withOpacity(0.1),
+      child: Text(
+        _errorMessage,
+        style: TextStyle(color: Colors.red[300], fontSize: 16),
       ),
     );
   }

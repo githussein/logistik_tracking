@@ -27,18 +27,24 @@ class Auth with ChangeNotifier {
     }
   }
 
+  void saveAuthData(String baseUrl, String username, String password){
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    this.username = username;
+    authHeader = {'authorization': basicAuth};
+    backendUrl = baseUrl;
+  }
+
   /// Signs a user in using basic authentication.
   ///
   /// Takes the [baseUrl] as the target url. Takes [username] and [password]
   /// to generate a header for basic authentication.
   Future<int> signIn(String baseUrl, String username, String password) async {
     var targetUrl = Uri.parse('$baseUrl/riot-api/config');
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
     try {
-      authHeader = {'authorization': basicAuth};
-      backendUrl = baseUrl;
+      saveAuthData(baseUrl, username, password);
 
       final response = await http.get(
         targetUrl,
