@@ -21,5 +21,6 @@
     "findOrders": "Aufträge finden",
     "timeInProcessStep": "Dauer im aktuellen Prozessschritt",
     "materialAssembly": "Material Montage",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "unknown": "unbekannt"
 }

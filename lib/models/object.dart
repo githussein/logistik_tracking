@@ -2,18 +2,18 @@ class Object {
   final int id;
   final String name;
   final String trackingId;
-  final String location;
-  final DateTime locationEnterTimestamp;
-  bool materialA = false;
-  bool materialB = false;
+  String location;
+  DateTime locationEnterTimestamp;
+  bool materialA;
+  bool materialB;
 
   Object({
     required this.id,
     required this.name,
     required this.trackingId,
-    required this.location,
+    this.location = 'unknown',
     required this.locationEnterTimestamp,
-    required this.materialA,
-    required this.materialB,
+    this.materialA = false,
+    this.materialB = false,
   });
 }
