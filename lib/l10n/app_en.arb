@@ -21,5 +21,6 @@
     "findOrders": "Find orders",
     "timeInProcessStep": "Time in current process step",
     "materialAssembly": "Material Assembly",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "unknown": "unknown"
 }
