@@ -1,3 +1,4 @@
+import 'package:demo_mobile_app/services/user_secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -69,6 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
+                UserSecureStorage.deleteAll();
                 Navigator.of(context, rootNavigator: true)
                     .pushNamedAndRemoveUntil(
                         '/', (Route<dynamic> route) => false);
