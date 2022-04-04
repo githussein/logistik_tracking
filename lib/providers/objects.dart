@@ -7,6 +7,15 @@ import '../models/object.dart';
 
 class Objects with ChangeNotifier {
   List<Object> _list = [];
+  final String propertiesKey = 'properties';
+  final String currentGeofencesKey = 'current_geofences';
+  final String trackingIdKey = 'tracking-id';
+  final String idKey = 'id';
+  final String nameKey = 'name';
+  final String materialA = 'Material A';
+  final String materialB = 'Material B';
+  final String readyForShipment = 'Ready for Shipment';
+
 
   List<Object> get ordersList => [..._list];
 
@@ -35,23 +44,24 @@ class Objects with ChangeNotifier {
         ///             "Outbound": "2022-03-16T16:13:40.441Z",
         ///             "Assembly": "2022-03-16T16:13:36.277Z"
         ///         }
-        if (object['current_geofences'].isNotEmpty) {
-          List currentGeofences = sortGeofences(object['current_geofences']);
+        if (object[currentGeofencesKey].isNotEmpty) {
+          List currentGeofences = sortGeofences(object[currentGeofencesKey]);
 
           loadedObjects.add(Object(
-            id: object['id'],
-            name: object['name'],
-            trackingId: object['properties']['tracking-id'] ?? '',
+            id: object[idKey],
+            name: object[nameKey],
+            trackingId: object[propertiesKey][trackingIdKey] ?? '',
             location: currentGeofences[0][0],
             locationEnterTimestamp: DateTime.parse(currentGeofences[0][1]),
-            materialA: object['properties'].containsKey('Material A'),
-            materialB: object['properties'].containsKey('Material B'),
+            materialA: object[propertiesKey][materialA] ?? 'missing',
+            materialB: object[propertiesKey][materialB] ?? 'missing',
+            readyForShipment: object[propertiesKey][readyForShipment] ?? 'no',
           ));
         } else {
           loadedObjects.add( Object(
-            id: object['id'],
-            name: object['name']!,
-            trackingId: object['properties']['tracking-id'] ?? '',
+            id: object[idKey],
+            name: object[nameKey],
+            trackingId: object[propertiesKey][trackingIdKey] ?? '',
             locationEnterTimestamp: DateTime.now(),
           ));
         }
@@ -74,23 +84,24 @@ class Objects with ChangeNotifier {
       List<dynamic> extractedData = json.decode(response.body) as List<dynamic>;
       final Map<String, dynamic> fetchedObject = extractedData[0];
 
-      if (fetchedObject['current_geofences'].isNotEmpty) {
-        List currentGeofences = sortGeofences(fetchedObject['current_geofences']);
+      if (fetchedObject[currentGeofencesKey].isNotEmpty) {
+        List currentGeofences = sortGeofences(fetchedObject[currentGeofencesKey]);
 
         return Object(
-          id: fetchedObject['id'],
-          name: fetchedObject['name'],
-          trackingId: fetchedObject['properties']['tracking-id'] ?? '',
+          id: fetchedObject[idKey],
+          name: fetchedObject[nameKey],
+          trackingId: fetchedObject[propertiesKey][trackingIdKey] ?? '',
           location: currentGeofences[0][0],
           locationEnterTimestamp: DateTime.parse(currentGeofences[0][1]),
-          materialA: fetchedObject['properties'].containsKey('Material A'),
-          materialB: fetchedObject['properties'].containsKey('Material B'),
+          materialA: fetchedObject[propertiesKey][materialA] ?? 'missing',
+          materialB: fetchedObject[propertiesKey][materialB] ?? 'missing' ,
+          readyForShipment: fetchedObject[propertiesKey][readyForShipment] ?? 'no',
         );
       } else {
         return Object(
-          id: fetchedObject['id'],
-          name: fetchedObject['name']!,
-          trackingId: fetchedObject['properties']['tracking-id'] ?? '',
+          id: fetchedObject[idKey],
+          name: fetchedObject[nameKey],
+          trackingId: fetchedObject[propertiesKey][trackingIdKey] ?? '',
           locationEnterTimestamp: DateTime.now(),
         );
       }

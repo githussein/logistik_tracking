@@ -70,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                UserSecureStorage.deleteAll();
+                UserSecureStorage.deleteCredentials();
                 Navigator.of(context, rootNavigator: true)
                     .pushNamedAndRemoveUntil(
                         '/', (Route<dynamic> route) => false);

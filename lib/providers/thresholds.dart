@@ -21,26 +21,29 @@ class ProcessStepThresholds with ChangeNotifier {
       List<dynamic> extractedData = json.decode(response.body) as List<dynamic>;
       final List<StepThresholds> loadedThresholds = [];
 
-      if(extractedData.isNotEmpty){
-        var subprocesses = extractedData[0]['data']['subprocesses'];
+      if (extractedData.isNotEmpty) {
+        var productionProcess = (extractedData.firstWhere(
+            (process) => process['data']['process_name']
+                .toLowerCase()
+                .contains('production')) as Map);
+
+        var subprocesses = productionProcess['data']['subprocesses'];
 
         for (var subprocess in subprocesses) {
           var steps = subprocess['sequence']['steps'];
           for (var step in steps) {
-
             loadedThresholds.add(StepThresholds(
               location: step['fence_name'] ?? 'unknown',
-              warningDurationInSeconds: step['duration_thresholds_warning'] ?? 0,
-              criticalDurationInSeconds:
-              step['duration_thresholds_critical'] ?? 0,
+              warningDurationInSeconds: step['duration_thresholds_warning'] ?? -1,
+              criticalDurationInSeconds: step['duration_thresholds_critical'] ?? -1,
             ));
           }
         }
       } else{
         loadedThresholds.add(StepThresholds(
           location: 'unknown',
-          warningDurationInSeconds:  0,
-          criticalDurationInSeconds: 0,
+          warningDurationInSeconds:  -1,
+          criticalDurationInSeconds: -1,
         ));
       }
 

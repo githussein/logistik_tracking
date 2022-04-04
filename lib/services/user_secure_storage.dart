@@ -25,5 +25,8 @@ class UserSecureStorage {
   static Future<String?> readTargetUrl() async =>
       await _storage.read(key: _targetUrlKey);
 
-  static void deleteAll() async => _storage.deleteAll();
+  static void deleteCredentials() async {
+    _storage.delete(key: _usernameKey);
+    _storage.delete(key: _passwordKey);
+  }
 }

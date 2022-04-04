@@ -19,7 +19,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final usernameController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
-  final targetBackendUrlController = TextEditingController(text: '');
+  var targetBackendUrlController = TextEditingController(text: '');
   bool _isError = false;
   bool _isLoading = false;
   bool _isAuthenticating = true;
@@ -42,6 +42,8 @@ class _SignInScreenState extends State<SignInScreen> {
     final username = await UserSecureStorage.readUsername() ?? '';
     final password = await UserSecureStorage.readPassword() ?? '';
     final targetUrl = await UserSecureStorage.readTargetUrl() ?? '';
+
+    targetBackendUrlController.text = targetUrl;
 
     if (username != '' && password != '' && targetUrl != '') {
       Provider.of<Auth>(context, listen: false)

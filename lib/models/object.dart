@@ -4,8 +4,9 @@ class Object {
   final String trackingId;
   String location;
   DateTime locationEnterTimestamp;
-  bool materialA;
-  bool materialB;
+  String materialA;
+  String materialB;
+  String readyForShipment;
 
   Object({
     required this.id,
@@ -13,7 +14,8 @@ class Object {
     required this.trackingId,
     this.location = 'unknown',
     required this.locationEnterTimestamp,
-    this.materialA = false,
-    this.materialB = false,
+    this.materialA = 'missing',
+    this.materialB = 'missing',
+    this.readyForShipment = 'no',
   });
 }
