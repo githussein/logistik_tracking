@@ -22,6 +22,8 @@
     "findOrders": "Find orders",
     "timeInProcessStep": "Time in current process step",
     "materialAssembly": "Material Assembly",
+    "shipmentStatus": "Shipment status",
+    "readyForShipment": "Ready for shipment",
     "cancel": "Cancel",
     "unknown": "unknown"
 }

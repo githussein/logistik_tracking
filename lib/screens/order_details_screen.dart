@@ -19,7 +19,11 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   TextStyle orderDetailsTextStyle = const TextStyle(fontSize: 24);
-  Color statusColor = Colors.green.shade400.withOpacity(0.70);
+  final Color _okayColor = Colors.green.shade400.withOpacity(0.80);
+  final Color _warningColor = Colors.orange.shade700.withOpacity(0.55);
+  final Color _criticalColor = Colors.red.shade700.withOpacity(0.75);
+  final Color _unknownColor = Colors.black54;
+  late Color _statusColor;
   bool showWarningIcon = false;
   Duration duration = const Duration();
   Timer? timer;
@@ -102,24 +106,35 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         DateTime.now().difference(viewedObject!.locationEnterTimestamp);
 
     StepThresholds currentStep = thresholds.firstWhere(
-        (threshold) => threshold.location == viewedObject!.location,
+        (threshold) => viewedObject!.location
+            .toLowerCase()
+            .contains(threshold.location.toLowerCase()),
         orElse: () => thresholds[0]);
-    if (viewedObject!.location == 'unknown') {
-      timer!.cancel();
-      statusColor = Colors.black45;
-    } else if (timeDifference.inSeconds <
-            currentStep.warningDurationInSeconds &&
-        timeDifference.inSeconds < currentStep.criticalDurationInSeconds) {
-      statusColor = Colors.green.shade400.withOpacity(0.70);
-    } else if (timeDifference.inSeconds >=
-            currentStep.warningDurationInSeconds &&
-        timeDifference.inSeconds < currentStep.criticalDurationInSeconds) {
-      statusColor = Colors.orange.shade700.withOpacity(0.55);
-    } else if (timeDifference.inSeconds >=
-        currentStep.criticalDurationInSeconds) {
-      statusColor = Colors.red.shade700.withOpacity(0.75);
-      showWarningIcon = true;
+
+    _statusColor = _okayColor;
+    if (!timer!.isActive && _statusColor != Colors.black54) {
+      startTimer();
     }
+
+    if (currentStep.warningDurationInSeconds != -1 &&
+        currentStep.criticalDurationInSeconds != -1 &&
+        timeDifference.inSeconds >= currentStep.warningDurationInSeconds &&
+        timeDifference.inSeconds < currentStep.criticalDurationInSeconds) {
+      _statusColor = _warningColor;
+    } else if (currentStep.warningDurationInSeconds != -1 &&
+        currentStep.criticalDurationInSeconds == -1 &&
+        timeDifference.inSeconds >= currentStep.warningDurationInSeconds) {
+      _statusColor = _warningColor;
+    } else if (timeDifference.inSeconds >=
+            currentStep.criticalDurationInSeconds &&
+        currentStep.criticalDurationInSeconds != -1) {
+      _statusColor = _criticalColor;
+    } else if (viewedObject!.location.toLowerCase().contains('unknown')) {
+      _statusColor = _unknownColor;
+      timer!.cancel();
+    }
+
+    showWarningIcon = _statusColor == _criticalColor ? true : false;
 
     Future<void> _refreshOrders() async {
       setState(() => _isLoading = true);
@@ -147,7 +162,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       width: double.infinity,
                       padding: const EdgeInsets.only(
                           top: 20, bottom: 50, left: 8, right: 20),
-                      color: statusColor,
+                      color: _statusColor,
                       child: Column(
                         children: [
                           Row(
@@ -175,11 +190,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                   color: Colors.white, size: 40),
                               const SizedBox(width: 5),
                               Text(
-                                viewedObject!.location == 'unknown'
+                                viewedObject!.location
+                                        .toLowerCase()
+                                        .contains('unknown')
                                     ? AppLocalizations.of(context)!.unknown
                                     : viewedObject!.location,
                                 style: const TextStyle(
-                                    fontSize: 40,
+                                    fontSize: 36,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -190,7 +207,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         ],
                       ),
                     ),
-                    viewedObject!.location.toLowerCase() == 'assembly'
+                    viewedObject!.location.toLowerCase().contains('assembly')
                         ? Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -220,9 +237,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                         const Spacer(flex: 3),
                                         Icon(
                                             viewedObject!.materialA
+                                                    .toLowerCase()
+                                                    .contains('assembled')
                                                 ? Icons.check_circle_outline
                                                 : Icons.radio_button_unchecked,
-                                            color: Colors.green.shade300,
+                                            color: viewedObject!.materialA
+                                                    .toLowerCase()
+                                                    .contains('assembled')
+                                                ? Colors.green.shade300
+                                                : Colors.grey,
                                             size: 32),
                                         const Spacer(flex: 2),
                                       ],
@@ -237,9 +260,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                         const Spacer(flex: 3),
                                         Icon(
                                             viewedObject!.materialB
+                                                    .toLowerCase()
+                                                    .contains('assembled')
                                                 ? Icons.check_circle_outline
                                                 : Icons.radio_button_unchecked,
-                                            color: Colors.black54,
+                                            color: viewedObject!.materialB
+                                                    .toLowerCase()
+                                                    .contains('assembled')
+                                                ? Colors.green.shade300
+                                                : Colors.grey,
                                             size: 32),
                                         const Spacer(flex: 2),
                                       ],
@@ -249,7 +278,60 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               ),
                             ],
                           )
-                        : Container(),
+                        : viewedObject!.location
+                                .toLowerCase()
+                                .contains('quality check')
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 20),
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .shipmentStatus,
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              AppLocalizations.of(context)!
+                                                  .readyForShipment,
+                                              style: orderDetailsTextStyle,
+                                            ),
+                                            const Spacer(flex: 3),
+                                            Icon(
+                                                viewedObject!.readyForShipment
+                                                        .toLowerCase()
+                                                        .contains('yes')
+                                                    ? Icons.check_circle_outline
+                                                    : Icons
+                                                        .radio_button_unchecked,
+                                                color: viewedObject!
+                                                        .readyForShipment
+                                                        .toLowerCase()
+                                                        .contains('yes')
+                                                    ? Colors.green.shade300
+                                                    : Colors.grey,
+                                                size: 32),
+                                            const Spacer(flex: 2),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Container(),
                   ],
                 ),
               ),

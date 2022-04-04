@@ -22,6 +22,8 @@
     "findOrders": "Aufträge finden",
     "timeInProcessStep": "Dauer im aktuellen Prozessschritt",
     "materialAssembly": "Material Montage",
+    "shipmentStatus": "Versandstatus",
+    "readyForShipment": "Bereit zum Versand",
     "cancel": "Abbrechen",
     "unknown": "unbekannt"
 }
