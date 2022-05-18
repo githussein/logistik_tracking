@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'map_screen.dart';
 import 'orders_screen.dart';
 import 'settings_screen.dart';
 
@@ -17,10 +18,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   String _currentPage = 'Orders';
   int _selectedIndex = 0;
 
-  List<String> pageKeys = ['Orders', 'Settings'];
+  List<String> pageKeys = ['Orders', 'Map', 'Settings'];
 
   final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
     'Orders': GlobalKey<NavigatorState>(),
+    'Map': GlobalKey<NavigatorState>(),
     'Settings': GlobalKey<NavigatorState>(),
   };
 
@@ -44,6 +46,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
           child: FaIcon(FontAwesomeIcons.box),
         ),
         label: AppLocalizations.of(context)!.orders,
+      ),
+      const BottomNavigationBarItem(
+        icon: Padding(
+          padding: EdgeInsets.only(bottom: 8),
+          child: FaIcon(FontAwesomeIcons.map),
+        ),
+        label: 'Karte',
       ),
       BottomNavigationBarItem(
         icon: const Padding(
@@ -69,6 +78,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         body: Stack(
           children: [
             _buildOffstageNavigator('Orders'),
+            _buildOffstageNavigator('Map'),
             _buildOffstageNavigator('Settings'),
           ],
         ),
@@ -103,7 +113,10 @@ class TabNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget child = const OrdersScreen();
-    if (tabItem == 'Settings') {
+
+    if (tabItem == 'Map') {
+      child = const MapScreen();
+    } else if (tabItem == 'Settings') {
       child = const SettingsScreen();
     }
 
