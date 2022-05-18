@@ -25,5 +25,6 @@
     "shipmentStatus": "Versandstatus",
     "readyForShipment": "Bereit zum Versand",
     "cancel": "Abbrechen",
-    "unknown": "unbekannt"
+    "unknown": "unbekannt",
+    "map": "karte"
 }

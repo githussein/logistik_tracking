@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../widgets/custom_app_bar_widget.dart';
@@ -29,7 +30,7 @@ class _MapScreenState extends State<MapScreen> {
     });
 
     return Scaffold(
-      appBar: const CustomAppBar(screenTitle: 'Karte'),
+      appBar: CustomAppBar(screenTitle: AppLocalizations.of(context)!.map),
       body: SafeArea(
         child: WebView(
           debuggingEnabled: true,

@@ -47,12 +47,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         label: AppLocalizations.of(context)!.orders,
       ),
-      const BottomNavigationBarItem(
-        icon: Padding(
+       BottomNavigationBarItem(
+        icon: const Padding(
           padding: EdgeInsets.only(bottom: 8),
           child: FaIcon(FontAwesomeIcons.map),
         ),
-        label: 'Karte',
+        label: AppLocalizations.of(context)!.map,
       ),
       BottomNavigationBarItem(
         icon: const Padding(
