@@ -20,6 +20,7 @@ class _MapScreenState extends State<MapScreen> {
   var targetBackendUrlController = TextEditingController(text: '');
   bool _isLoading = false;
   bool _isError = false;
+  String _errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -111,22 +112,7 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ],
       ),
-      body:
-          //     Center(
-          //       child: Link(
-          //         uri: Uri.parse(
-          //             'https://pub.dev/'),
-          //         target: LinkTarget.self,
-          //         builder: (BuildContext ctx, FollowLink? openLink) {
-          //           return TextButton.icon(
-          //             onPressed: openLink,
-          //             label: const Text('Link Widget documentation'),
-          //             icon: const Icon(Icons.read_more),
-          //           );
-          //         },
-          //       ),
-          // ),
-          WebView(
+      body: WebView(
         debuggingEnabled: true,
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (controller) async {
