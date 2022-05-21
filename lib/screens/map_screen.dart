@@ -60,7 +60,7 @@ class _MapScreenState extends State<MapScreen> {
                         TextFormField(
                           maxLines: 2,
                           controller: targetBackendUrlController,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.url,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
                               fillColor: Color(0xfff3f3f3),

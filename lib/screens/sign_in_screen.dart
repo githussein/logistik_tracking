@@ -80,7 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         TextFormField(
                           maxLines: 2,
                           controller: targetBackendUrlController,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.url,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
                               fillColor: Color(0xfff3f3f3),
@@ -161,7 +161,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     _lineDivider,
                     TextFormField(
                       controller: usernameController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.url,
                       decoration: InputDecoration(
                           labelText: AppLocalizations.of(context)!.username,
                           suffixIcon: const Icon(Icons.person),
