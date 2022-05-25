@@ -107,7 +107,6 @@ class _SignInScreenState extends State<SignInScreen> {
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                backgroundColor: Colors.green.shade400,
                                 content: Text(
                                     '${targetBackendUrlController.text} \n${AppLocalizations.of(context)!.baseUrlUpdated}.'),
                               ),
@@ -135,80 +134,74 @@ class _SignInScreenState extends State<SignInScreen> {
       body: Center(
         child: _isAuthenticating
             ? const CircularProgressIndicator()
-            : Column(
-              children: [
-                SizedBox(height: 50),
-                const Image(image: AssetImage('assets/images/img.png')),
-                Card(
-                    elevation: 16,
-                    margin: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: _isLoading
-                              ? const CircularProgressIndicator()
-                              : Text(
-                                  AppLocalizations.of(context)!.signIn,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w900,
-                                      color: Theme.of(context).primaryColorDark),
-                                ),
-                        ),
-                        if (_isError)
-                          FeedbackContainer(errorMessage: _errorMessage),
-                        _lineDivider,
-                        TextFormField(
-                          controller: usernameController,
-                          keyboardType: TextInputType.url,
-                          decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)!.username,
-                              suffixIcon: const Icon(Icons.person),
-                              border: InputBorder.none,
-                              fillColor: const Color(0xfff3f3f3),
-                              filled: true),
-                        ),
-                        _lineDivider,
-                        TextFormField(
-                          controller: passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              labelText: AppLocalizations.of(context)!.password,
-                              suffixIcon: const Icon(Icons.lock),
-                              border: InputBorder.none,
-                              fillColor: const Color(0xfff3f3f3),
-                              filled: true),
-                        ),
-                        ListTile(
-                          onTap: () async => await _onSignInTap(context),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(10),
-                              bottomLeft: Radius.circular(10),
+            : Card(
+                elevation: 16,
+                margin: const EdgeInsets.all(16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: _isLoading
+                          ? const CircularProgressIndicator()
+                          : Text(
+                              AppLocalizations.of(context)!.signIn,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900,
+                                  color: Theme.of(context).primaryColorDark),
                             ),
-                          ),
-                          tileColor: Theme.of(context).primaryColorDark,
-                          title: Text(
-                            AppLocalizations.of(context)!.signIn,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
-                  ),
-              ],
-            ),
+                    if (_isError)
+                      FeedbackContainer(errorMessage: _errorMessage),
+                    _lineDivider,
+                    TextFormField(
+                      controller: usernameController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.username,
+                          suffixIcon: const Icon(Icons.person),
+                          border: InputBorder.none,
+                          fillColor: const Color(0xfff3f3f3),
+                          filled: true),
+                    ),
+                    _lineDivider,
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)!.password,
+                          suffixIcon: const Icon(Icons.lock),
+                          border: InputBorder.none,
+                          fillColor: const Color(0xfff3f3f3),
+                          filled: true),
+                    ),
+                    ListTile(
+                      onTap: () async => await _onSignInTap(context),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
+                      ),
+                      tileColor: Theme.of(context).primaryColorDark,
+                      title: Text(
+                        AppLocalizations.of(context)!.signIn,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
       ),
     );
   }
