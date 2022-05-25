@@ -20,6 +20,7 @@ class _MapScreenState extends State<MapScreen> {
   var targetBackendUrlController = TextEditingController(text: '');
   bool _isLoading = false;
   bool _isError = false;
+  bool _isMapUrlSet = false;
   String _errorMessage = '';
 
   @override
@@ -27,11 +28,13 @@ class _MapScreenState extends State<MapScreen> {
     var basicAuthHeader = Provider.of<Auth>(context).authHeader;
     _completer.future.then((controller) {
       _controller = controller;
-
-      _controller.loadUrl(
-          Uri.encodeFull('http://mohamed-hussein.base.knx/riot/embed/map'),
-          headers: basicAuthHeader);
     });
+
+    void update(){
+      setState(() => _isMapUrlSet = true);
+      _controller.loadUrl(targetBackendUrlController.text,
+          headers: basicAuthHeader);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -58,9 +61,10 @@ class _MapScreenState extends State<MapScreen> {
                               errorMessage: AppLocalizations.of(context)!
                                   .errorInvalidBackendUrl),
                         TextFormField(
-                          maxLines: 2,
+                          // minLines: 2,
+                          maxLines: 3,
                           controller: targetBackendUrlController,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.url,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
                               fillColor: Color(0xfff3f3f3),
@@ -88,14 +92,14 @@ class _MapScreenState extends State<MapScreen> {
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
+                                backgroundColor: Colors.green.shade400,
                                 content: Text(
-                                    '${targetBackendUrlController.text} \n${AppLocalizations.of(context)!.baseUrlUpdated}.'),
+                                    '"${targetBackendUrlController.text}"\n${AppLocalizations.of(context)!.baseUrlUpdated}.'),
                               ),
                             );
 
                             Navigator.pop(context);
-                            _controller.loadUrl(targetBackendUrlController.text,
-                                headers: basicAuthHeader);
+                            update();
                           } catch (error) {
                             _errorMessage = AppLocalizations.of(context)!
                                 .errorInvalidBackendUrl;
@@ -112,13 +116,32 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ],
       ),
-      body: WebView(
-        debuggingEnabled: true,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (controller) async {
-          _completer.complete(controller);
-        },
-      ),
+      body: _isMapUrlSet
+          ? WebView(
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (controller) async {
+                _completer.complete(controller);
+              },
+            )
+          : Padding(
+            padding: const EdgeInsets.all(16),
+            child: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image(
+                        image: const AssetImage('assets/images/nomap.png'),
+                        color: Theme.of(context).primaryColor),
+                    const SizedBox(height: 20),
+                    const Text('Karten-URL ist noch nicht eingestelt.',
+                    style: TextStyle(
+                      color: Colors.black45,
+                      fontSize: 16,
+                    ),),
+                  ],
+                ),
+            ),
+          ),
     );
   }
 }

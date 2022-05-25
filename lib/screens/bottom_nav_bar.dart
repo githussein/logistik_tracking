@@ -42,21 +42,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
     final List<BottomNavigationBarItem> _items = [
       BottomNavigationBarItem(
         icon: const Padding(
-          padding: EdgeInsets.only(bottom: 8),
+          padding: EdgeInsets.symmetric(vertical: 8),
           child: FaIcon(FontAwesomeIcons.box),
         ),
         label: AppLocalizations.of(context)!.orders,
       ),
        BottomNavigationBarItem(
         icon: const Padding(
-          padding: EdgeInsets.only(bottom: 8),
+          padding: EdgeInsets.symmetric(vertical: 8),
           child: FaIcon(FontAwesomeIcons.map),
         ),
         label: AppLocalizations.of(context)!.map,
       ),
       BottomNavigationBarItem(
         icon: const Padding(
-          padding: EdgeInsets.only(bottom: 8),
+          padding: EdgeInsets.symmetric(vertical: 8),
           child: FaIcon(FontAwesomeIcons.cog),
         ),
         label: AppLocalizations.of(context)!.settings,
@@ -84,6 +84,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: _items,
+          backgroundColor: Colors.grey.shade800,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.grey,
+
           currentIndex: _selectedIndex,
           onTap: (int index) => _selectTab(pageKeys[index], index),
         ),
