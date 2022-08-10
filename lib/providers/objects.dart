@@ -28,7 +28,7 @@ class Objects with ChangeNotifier {
 
   Future<void> fetchOrders(BuildContext context) async {
     Uri targetUrl = Uri.parse(
-        '${Provider.of<Auth>(context, listen: false).backendUrl}/riot-api/objects?labels=Order&current_geofences=true');
+        '${Provider.of<Auth>(context, listen: false).backendUrl}/api/packages?location=entry&active=true');
 
     try {
       final response = await http.get(targetUrl,
@@ -75,7 +75,7 @@ class Objects with ChangeNotifier {
 
   Future<Object> fetchObjectById(BuildContext context, int id) async {
     var targetUrl = Uri.parse(
-        '${Provider.of<Auth>(context, listen: false).backendUrl}/riot-api/objects?id=$id&current_geofences=true');
+        '${Provider.of<Auth>(context, listen: false).backendUrl}/api/packages?id=$id&active=true');
 
     try {
       final response = await http.get(targetUrl,

@@ -14,7 +14,7 @@ class Auth with ChangeNotifier {
   /// Takes the [targetBackendUrl] and in case of no error that means
   /// a connection is successful to the valid server.
   Future<int> validateTargetBackend(String targetBackendUrl) async {
-    var targetUrl = Uri.parse('$targetBackendUrl/riot-api/config');
+    var targetUrl = Uri.parse('$targetBackendUrl/api/access');
 
     try {
       final response = await http.get(targetUrl);
@@ -41,7 +41,7 @@ class Auth with ChangeNotifier {
   /// Takes the [baseUrl] as the target url. Takes [username] and [password]
   /// to generate a header for basic authentication.
   Future<int> signIn(String baseUrl, String username, String password) async {
-    var targetUrl = Uri.parse('$baseUrl/riot-api/config');
+    var targetUrl = Uri.parse('$baseUrl/api/access');
 
     try {
       saveAuthData(baseUrl, username, password);

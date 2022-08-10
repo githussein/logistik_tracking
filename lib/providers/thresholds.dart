@@ -12,7 +12,7 @@ class ProcessStepThresholds with ChangeNotifier {
 
   Future<void> fetchProcessModel(BuildContext context) async {
     var targetUrl = Uri.parse(
-        '${Provider.of<Auth>(context, listen: false).backendUrl}/riot-api/process-model?name=Production');
+        '${Provider.of<Auth>(context, listen: false).backendUrl}/api/process?name=Entry');
 
     try {
       final response = await http.get(targetUrl,
