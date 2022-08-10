@@ -67,7 +67,7 @@ class _MapScreenState extends State<MapScreen> {
                           keyboardType: TextInputType.url,
                           decoration: const InputDecoration(
                               border: InputBorder.none,
-                              fillColor: Color(0xfff3f3f3),
+                              fillColor: Colors.black12,
                               filled: true),
                         ),
                       ],
